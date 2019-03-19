@@ -5,22 +5,16 @@
         document.getElementById('NewsWidget').style.height = data + 'px';
     });
     
-    var newsWidget = document.getElementById('NewsWidget');
-    
-    // attach a listener to the iframe load
-    newsWidget.addEventListener("load", function () {
-        var newsWidgetHeight = newsWidget.clientHeight;
-        
-        // attach a listener to the page scroll
+    window.addEventListener("load", function () {
         document.addEventListener('scroll', onScroll);
 
         function inView() {
-            // check if in view
+            var newsWidget = document.getElementById('NewsWidget');
             var windowHeight = window.innerHeight;
             var scrollY = window.scrollY || window.pageYOffset;
 
             var scrollPosition = scrollY + windowHeight;
-            var elementPosition = newsWidget.getBoundingClientRect().top + scrollY + newsWidgetHeight;
+            var elementPosition = newsWidget.getBoundingClientRect().top + scrollY + newsWidget.clientHeight;
 
             if (scrollPosition > elementPosition) {
                 return true;
@@ -28,15 +22,15 @@
 
             return false;
         }
-
         function onScroll() {
-            // fire on page scroll
             if (inView()) {
-                // when in view send a message to the iframe and remove the onScrolllistener 
                 console.log('onScroll_parent');
+
+                var newsWidget = document.getElementById('NewsWidget');
                 newsWidget.contentWindow.postMessage('onScroll', '*');
                 document.removeEventListener('scroll', onScroll);
             }
         }
-});
+        onScroll();
+    });
 }();
