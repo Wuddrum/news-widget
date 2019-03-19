@@ -144,6 +144,7 @@
     function receiveMessage(event) {
         // do something
         console.log('received: ' + event.data);
+        alert('received: ' + event.data);
     }
 
 }(window, document);
