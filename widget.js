@@ -1,7 +1,7 @@
 !function (window, document, id) {
 	window.addEventListener('message', function (e) {
 		var data = e.data;
-		if (!+data || data <= 0)
+		if (!+data || data < 1)
 			return;
 		document.getElementById(id).style.height = data + 'px';
 	});
