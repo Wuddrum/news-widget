@@ -1,36 +1,32 @@
-!function() {
-    window.addEventListener('message', function(e) {
-        var data = e.data;
-        if (!e.origin || !+data || data <= 0) return;
-        document.getElementById('NewsWidget').style.height = data + 'px';
-    });
-    
-    window.addEventListener("load", function () {
-        document.addEventListener('scroll', onScroll);
+window.onload = function () {
+	var newsWidget = document.getElementById('NewsWidget');
+	document.addEventListener('scroll', onScroll);
 
-        function inView() {
-            var newsWidget = document.getElementById('NewsWidget');
-            var windowHeight = window.innerHeight;
-            var scrollY = window.scrollY || window.pageYOffset;
+	window.addEventListener('message', function (e) {
+		var data = e.data;
+		if (!e.origin || !+data || data <= 0)
+			return;
+		newsWidget.style.height = data + 'px';
+	});
 
-            var scrollPosition = scrollY + windowHeight;
-            var elementPosition = newsWidget.getBoundingClientRect().top + scrollY + newsWidget.clientHeight;
+	function inView() {
+		var windowHeight = window.innerHeight;
+		var scrollY = window.scrollY || window.pageYOffset;
 
-            if (scrollPosition > elementPosition) {
-                return true;
-            }
+		var scrollPosition = scrollY + windowHeight;
+		var elementPosition = newsWidget.getBoundingClientRect().top + scrollY + newsWidget.clientHeight;
 
-            return false;
-        }
-        function onScroll() {
-            if (inView()) {
-                console.log('onScroll_parent');
+		if (scrollPosition > elementPosition) {
+			return true;
+		}
 
-                var newsWidget = document.getElementById('NewsWidget');
-                newsWidget.contentWindow.postMessage('onScroll', '*');
-                document.removeEventListener('scroll', onScroll);
-            }
-        }
-        onScroll();
-    });
-}();
+		return false;
+	}
+	function onScroll() {
+		if (inView()) {
+			newsWidget.contentWindow.postMessage('s', '*');
+			document.removeEventListener('scroll', onScroll);
+		}
+	}
+	onScroll();
+};
