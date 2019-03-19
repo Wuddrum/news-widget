@@ -137,4 +137,13 @@
     var tileEls = createAndInsertTiles(numItems);
     requestArticles(tileEls, currentPage);
     currentPage++;
+    
+    // listen for messages
+    window.addEventListener("message", receiveMessage, false);
+
+    function receiveMessage(event) {
+        // do something
+        console.log('received: ' + event.data);
+    }
+
 }(window, document);
