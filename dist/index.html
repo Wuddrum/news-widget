@@ -69,7 +69,7 @@
         <div class="full" style="margin-bottom: 14px;">
             <div class="filler" style="height: 800px;"></div>
         </div>
-        <script>!function(t,o,i){t.addEventListener("message",function(e){var n=e.data;!+n||n<1||(o.getElementById(i).style.height=n+"px")}),t.onload=function(){var e=o.getElementById(i);function n(){t.innerHeight>e.getBoundingClientRect().top&&(o.removeEventListener("scroll",n),e.contentWindow.postMessage("s","*"))}o.addEventListener("scroll",n),n()}}(window,document,"NewsWidget");</script>
+        <script>!function(t,o,i){t.addEventListener("message",function(e){var n=e.data;n+1<2||(o.getElementById(i).style.height=n+"px")}),t.onload=function(){var e=o.getElementById(i);function n(){t.innerHeight>e.getBoundingClientRect().top&&(o.removeEventListener("scroll",n),e.contentWindow.postMessage("s","*"))}o.addEventListener("scroll",n),n()}}(window,document,"NewsWidget");</script>
         <iframe id="NewsWidget" src="//ahmedengu.github.io/news-widget/dist/embed.html?numItems=8&maxItemsPerRow=4" width="100%" frameborder="0" scrolling="no"></iframe>
         <div class="half" style="float: left; display: inline-block; margin-top: 14px;">
             <div class="filler" style="height: 650px; margin-right: 7px;"></div>
