@@ -7,15 +7,13 @@
 	});
 
 	window.onload = function () {
+		var newsWidget = document.getElementById(id);
 		document.addEventListener('scroll', onScroll);
-
 		function onScroll() {
 			var scrollY = window.scrollY || window.pageYOffset;
 			if (scrollY + window.innerHeight > newsWidget.getBoundingClientRect().top + scrollY + newsWidget.clientHeight) {
-				var newsWidget = document.getElementById(id);
 				newsWidget.contentWindow.postMessage('s', '*');
 				document.removeEventListener('scroll', onScroll);
-
 			}
 		}
 		onScroll();
