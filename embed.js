@@ -131,6 +131,7 @@
     
     window.addEventListener('resize', onResize);
     window.addEventListener('orientationchange', onResize);
+    window.addEventListener('load', onResize);
     getElementById('readmore').addEventListener('click', onReadMode);
     getElementById('readmore').addEventListener('touchstart', onReadMode);
     
