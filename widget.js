@@ -12,8 +12,8 @@
 		function onScroll() {
 			var scrollY = window.scrollY || window.pageYOffset;
 			if (scrollY + window.innerHeight > newsWidget.getBoundingClientRect().top + scrollY + newsWidget.clientHeight) {
-				newsWidget.contentWindow.postMessage('s', '*');
 				document.removeEventListener('scroll', onScroll);
+				newsWidget.contentWindow.postMessage('s', '*');
 			}
 		}
 		onScroll();
