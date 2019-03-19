@@ -1,32 +1,24 @@
-window.onload = function () {
-	var newsWidget = document.getElementById('NewsWidget');
-	document.addEventListener('scroll', onScroll);
-
+!function (window, document, id) {
 	window.addEventListener('message', function (e) {
 		var data = e.data;
-		if (!e.origin || !+data || data <= 0)
+		if (!+data || data <= 0)
 			return;
-		newsWidget.style.height = data + 'px';
+		document.getElementById(id).style.height = data + 'px';
 	});
 
-	function inView() {
-		var windowHeight = window.innerHeight;
-		var scrollY = window.scrollY || window.pageYOffset;
+	window.onload = function () {
+		document.addEventListener('scroll', onScroll);
 
-		var scrollPosition = scrollY + windowHeight;
-		var elementPosition = newsWidget.getBoundingClientRect().top + scrollY + newsWidget.clientHeight;
+		function onScroll() {
+			var scrollY = window.scrollY || window.pageYOffset;
+			if (scrollY + window.innerHeight > newsWidget.getBoundingClientRect().top + scrollY + newsWidget.clientHeight) {
+				var newsWidget = document.getElementById(id);
+				newsWidget.contentWindow.postMessage('s', '*');
+				document.removeEventListener('scroll', onScroll);
 
-		if (scrollPosition > elementPosition) {
-			return true;
+			}
 		}
-
-		return false;
-	}
-	function onScroll() {
-		if (inView()) {
-			newsWidget.contentWindow.postMessage('s', '*');
-			document.removeEventListener('scroll', onScroll);
-		}
-	}
-	onScroll();
-};
+		onScroll();
+	};
+}
+(window, document, 'NewsWidget');
