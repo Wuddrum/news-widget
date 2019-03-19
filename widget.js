@@ -9,9 +9,9 @@
 	window.onload = function () {
 		var newsWidget = document.getElementById(id);
 		document.addEventListener('scroll', onScroll);
+
 		function onScroll() {
-			var scrollY = window.scrollY || window.pageYOffset;
-			if (scrollY + window.innerHeight > newsWidget.getBoundingClientRect().top + scrollY + newsWidget.clientHeight) {
+			if (window.innerHeight > newsWidget.getBoundingClientRect().top) {
 				document.removeEventListener('scroll', onScroll);
 				newsWidget.contentWindow.postMessage('s', '*');
 			}
